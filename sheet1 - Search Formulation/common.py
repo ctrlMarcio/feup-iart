@@ -26,7 +26,7 @@ class Node:
     def is_root(self):
         return self.parent == False
 
-    def is_repeated(self, depth=4):
+    def is_repeated(self, depth=6):
         if self.is_root() or depth == 0:
             return False
 
@@ -64,8 +64,8 @@ def __bfs(states, functions, objective):
 
     for f in functions:
         result = f(*(current_state.state))
-        if result != False:
-            states.append(Node(result, current_state))
+        if result != False and not current_state.is_repeated():
+            states.append(Node(result, current_state, current_state.depth + 1))
 
     return __bfs(states, functions, objective)
 
