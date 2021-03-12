@@ -2,7 +2,7 @@
 # DISCLAIMER IN UPPER CASE BECAUSE IM IN CRISIS
 # WELL THE SITUATION IS, I COULD DOCUMENT THIS ESPARGUETE BUT FIRST OF ALL I DONT WANT TO
 # AND SECOND OF ALL I DONT FEEL LIKE IT, THIS IS A CARBONARA ALREADY AND I DONT WANT TO LOOK
-# AT THIS CODE ANYMORE DONT CONTACTE ME ABOUT THIS, THANK YOU 🖤
+# AT THIS CODE ANYMORE DONT CONTACT ME ABOUT THIS, THANK YOU 🖤
 
 class Node:
     def __init__(self, state, parent=False, depth=0):
@@ -59,11 +59,11 @@ def __bfs(states, functions, objective):
 
     current_state = states.pop(0)
 
-    if objective(*(current_state.state)):
+    if objective(current_state.state):
         return current_state
 
     for f in functions:
-        result = f(*(current_state.state))
+        result = f(current_state.state)
         if result != False and not current_state.is_repeated():
             states.append(Node(result, current_state, current_state.depth + 1))
 
@@ -90,7 +90,7 @@ def __dfs(states, functions, objective, best_state, depth, stop_on_find=False):
     if (current_state.depth > depth):
         return __dfs(states, functions, objective, best_state, depth, stop_on_find)
 
-    if objective(*(current_state.state)):
+    if objective(current_state.state):
         if stop_on_find:
             return current_state
 
@@ -102,7 +102,7 @@ def __dfs(states, functions, objective, best_state, depth, stop_on_find=False):
         return __dfs(states, functions, objective, best_state, depth, stop_on_find)
 
     for f in functions:
-        result = f(*(current_state.state))
+        result = f(current_state.state)
         if result != False and not current_state.is_repeated():
             states.append(Node(result, current_state,
                                current_state.depth + 1))
