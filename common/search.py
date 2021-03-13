@@ -109,7 +109,8 @@ def a_star(initial_state, functions, objective, heuristic):
 
     return last_node.path_string()
 
- ### HELPER FUNCTIONS ###
+
+### HELPER FUNCTIONS ###
 
 
 def __bfs(states, functions, objective):
@@ -163,7 +164,7 @@ def __a_star(states, functions, objective, heuristic):
     if len(states) == 0:
         return False
 
-    states = sorted(states, key=lambda node: heuristic(node.state))
+    states.sort(key=lambda node: heuristic(node))
     current_state = states.pop(0)
 
     if objective(current_state.state):
@@ -173,8 +174,7 @@ def __a_star(states, functions, objective, heuristic):
         result = f(current_state.state)
         if result != False and not current_state.is_repeated():
             node = Node(result, current_state,
-                               f.__name__, current_state.depth + 1)
+                        f.__name__, current_state.depth + 1)
             states.append(node)
-            
 
     return __a_star(states, functions, objective, heuristic)
